@@ -15,18 +15,16 @@ More practice:
 If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
-int maxSubArray(int* nums, int numsSize) {
-    int i, s, m = 0;
-    m = s = nums[0];
-    for (i = 1; i < numsSize; i ++) {
-        //printf("s: %d, m: %d\n", s, m);
-        if (s > 0) s += nums[i];
-        else       s  = nums[i];
-        if (m < s) m = s;
-    }
-    //printf("s: %d, m: %d\n", s, m);
-    return m;
-}
+class Solution:
+  def maxSubArray(self, nums: list[int]) -> int:
+    # dp[i] := the maximum sum subarray ending in i
+    dp = [0] * len(nums)
+
+    dp[0] = nums[0]
+    for i in range(1, len(nums)):
+      dp[i] = max(nums[i], dp[i - 1] + nums[i])
+
+    return max(dp)
 
 
 /*
